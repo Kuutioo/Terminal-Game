@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +18,7 @@ public class TerminalManager : MonoBehaviour
 
     private void Awake()
     {
-        interpreter = GetComponent<Interpreter>();
+        interpreter = new Interpreter();
     }
 
     private void OnGUI()
@@ -38,6 +36,7 @@ public class TerminalManager : MonoBehaviour
 
             // Add the interpretation lines
             int lines = AddInterpreterLines(interpreter.Interpret(userInput));
+            //AddInterpreterLines2(interpreter.Interpret2(userInput));
 
             // Scroll to the bottom of scroll rect
             ScrollToBottom();
@@ -87,6 +86,27 @@ public class TerminalManager : MonoBehaviour
 
         return interpretation.Count;
     }
+
+    /*private TerminalResponseBundle AddInterpreterLines2(TerminalResponseBundle interpretation)
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            // Instantiate the response line
+            GameObject response = Instantiate(responseLine, msgList.transform);
+
+            // Set it to end of all messages
+            response.transform.SetAsLastSibling();
+
+            // Get size of messaage list
+            Vector2 listSize = msgList.GetComponent<RectTransform>().sizeDelta;
+            msgList.GetComponent<RectTransform>().sizeDelta = new Vector2(listSize.x, listSize.y + 20.0f);
+
+            // Set text of response line to be the interpreter string
+            //response.GetComponentInChildren<Text>().text = interpretation[i];
+        }
+
+       return interpretation;
+    }*/
 
     private void ScrollToBottom()
     {

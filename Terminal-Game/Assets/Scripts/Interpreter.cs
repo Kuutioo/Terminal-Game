@@ -1,10 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class Interpreter : MonoBehaviour
+public class Interpreter
 {
-    Dictionary<string, ICommands> commandsDictionary = new Dictionary<string, ICommands>();
+    static Dictionary<string, ICommands> commandsDictionary = new Dictionary<string, ICommands>()
+    {
+        {"help", new HelpCommand()},
+        {"clear", new ClearCommand()},
+        {"echo", new EchoCommand()}
+    };
+
+    /*Dictionary<string, ITerminalCommand> validInput = new Dictionary<string, ITerminalCommand>()
+    {
+        {"testing", new Testing()},
+    };*/
 
     Dictionary<string, string> colors = new Dictionary<string, string>()
     {
@@ -17,18 +28,8 @@ public class Interpreter : MonoBehaviour
         {"orange", "#ef5847"}
     };
 
-    public List<string> response = new List<string>();
-    public Interpreter interpreter;
-    public string[] args;
-
-    private void Start()
-    {
-        interpreter = GetComponent<Interpreter>();
-
-        commandsDictionary.Add("help", gameObject.GetComponent<HelpCommand>());
-        commandsDictionary.Add("clear", gameObject.GetComponent<ClearCommand>());
-        commandsDictionary.Add("echo", gameObject.GetComponent<EchoCommand>());
-    }
+    public static List<string> response = new List<string>();
+    public static string[] args;
 
     public List<string> Interpret(string userInput)
     {
@@ -41,17 +42,31 @@ public class Interpreter : MonoBehaviour
         {
             commands.Command();
         }
-
-        return response;
-
-        /*
         else
         {
-            Entry(userInput + " is not recognized as an internal or external command Please type help for a list of commands", "red");
+            Entry(args[0] + " is not recognized as an internal or external command. Please type help for a list of commands", "red");
+        }
 
-            return response;
-        }*/
+        return response;
     }
+
+    /*public TerminalResponseBundle Interpret2(string userInput)
+    {
+        string command = userInput.Split()[0];
+        object[] args = userInput.Split().Skip(1).ToArray();
+
+        if (validInput.ContainsKey(command) && validInput[command].IsVisible)
+        {
+            ITerminalCommand c = validInput[command];
+            c.Arguments = args;
+            return c.Execute();
+        }
+        else
+        {
+            return new TerminalResponseBundle();
+        }
+
+    }*/
 
     public string ColorString(string s, string color)
     {
@@ -63,11 +78,70 @@ public class Interpreter : MonoBehaviour
 
     public void Entry(string a, string color)
     {
-        interpreter.response.Add(ColorString(a, colors[color]));
+        response.Add(ColorString(a, colors[color]));
     }
 
     public void ListEntry(string a, string b, string colorA, string colorB)
     {
-        interpreter.response.Add(ColorString(a, colors[colorA]) + ": " + ColorString(b, colors[colorB]));
+        response.Add(ColorString(a, colors[colorA]) + ": " + ColorString(b, colors[colorB]));
     }
 }
+
+/*public class TerminalResponseBundle
+{
+    //Important data
+    public List<string> responses = new List<string>();
+
+    //Additional settings
+    public bool doesClearTerminal = false;
+    public bool isAnimatedImage = false;
+
+    //Overload the add method to accept entire objects and also just strings
+    public void Add(string line)
+    {
+        responses.Add(line);
+    }
+
+    public void Clear()
+    {
+        responses.Clear();
+    }
+
+}
+
+public interface ITerminalCommand
+{
+
+    string Name { get; set; }
+
+    bool IsVisible { get; set; }
+
+    Dictionary<string, string> Examples { get; set; }
+
+    string Description { get; set; }
+
+    object[] Arguments { get; set; }
+
+    TerminalResponseBundle Response { get; set; }
+
+    TerminalResponseBundle Execute();
+}
+
+public class Testing : ITerminalCommand
+{
+    public string Name { get; set; } = "opacity";
+    public bool IsVisible { get; set; } = true;
+    public string Example { get; set; } = "opacity 10";
+    public string Description { get; set; } = "Set the transparency of the terminal backing.";
+    public object[] Arguments { get; set; }
+    public TerminalResponseBundle Response { get; set; } = new TerminalResponseBundle();
+    public List<string> Examples { get; set; }
+    Dictionary<string, string> ITerminalCommand.Examples { get; set; }
+
+    public TerminalResponseBundle Execute()
+    {
+        Response.Clear();
+        Debug.Log("It worked!");
+        return Response;
+    }
+}*/

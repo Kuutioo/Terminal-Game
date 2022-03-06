@@ -1,23 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ClearCommand : Interpreter, ICommands
 {
-    [SerializeField]
-    private GameObject commandLineContainer;
-
     public void Command()
     {
-        foreach (Transform child in commandLineContainer.transform)
+        GameObject commandLine = GameObject.Find("Command Line Container");
+
+        foreach (Transform child in commandLine.transform)
         {
-            if (child.gameObject.CompareTag("InputLine"))
+            if (!child.gameObject.CompareTag("InputLine"))
             {
-                continue;
-            }
-            else
-            {
-                Destroy(child.gameObject);
+                Object.Destroy(child.gameObject);
             }
         }
     }
