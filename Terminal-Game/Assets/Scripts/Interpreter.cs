@@ -170,10 +170,20 @@ public class Testing : ITerminalCommand
 
     public TerminalResponseBundle Execute()
     {
-        Response.Clear();
+        /*Response.Clear();
         Debug.Log("We are here!");
         Response.Add("Hello World!");
         Response.ListEntry("echo", "Echoes input", "red", "yellow");
+        return Response;*/
+        Response.Clear();
+        string text = string.Empty;
+
+        for (int i = 0; i < Arguments.Length; i++)
+        {
+            text += Arguments[i] + " ";
+        }
+
+        Response.Add(text);
         return Response;
     }
 }
