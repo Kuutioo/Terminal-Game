@@ -23,10 +23,24 @@ public class TextScaleFactorCommand : ICommands
         var en = new CultureInfo("en-US");
 
         float scaleFactorValue;
-        float.TryParse(Arguments[0].ToString(), NumberStyles.Currency, en, out scaleFactorValue);
 
-        canvasScaler.scaleFactor = scaleFactorValue;
-        Response.Add("Changed Scale Factor to: " + scaleFactorValue.ToString().Replace(",", "."));
+        try
+        {
+            bool isNumeric = float.TryParse(Arguments[0].ToString(), NumberStyles.Currency, en, out scaleFactorValue);
+            if (isNumeric)
+            {
+                canvasScaler.scaleFactor = scaleFactorValue;
+                Response.Entry("Changed Scale Factor to: " + scaleFactorValue.ToString().Replace(",", "."), "green");
+            }
+            else
+            {
+                Response.Entry("Please enter a floating point number as an argument", "red");
+            }
+        }
+        catch
+        {
+            Response.Entry("Please enter an argument in the form of a floating point number", "red");
+        }
         
         return Response;
     }

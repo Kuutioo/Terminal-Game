@@ -11,12 +11,12 @@ public class TerminalResponseBundle
         {"black", "#021b21"},
         {"grey", "#555d71"},
         {"red", "#ff5879"},
-        {"yellow", "#f2f1b9"},
+        {"yellow", "#ffcb00"},
         {"blue", "#9ed9d8"},
         {"purple", "#d926ff"},
-        {"orange", "#ef5847"}
+        {"orange", "#ef5847"},
+        {"green", "#00ff15"}
     };
-
 
     public string ColorString(string s, string color)
     {

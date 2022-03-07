@@ -21,6 +21,7 @@ public class ClearCommand : ICommands
                 Object.Destroy(child.gameObject);
             }
         }
+        commandLine.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 15);
         return Response;
     }
 }

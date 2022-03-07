@@ -13,8 +13,13 @@ public class Interpreter
         {"text_size", new TextScaleFactorCommand()}
     };
 
+    public List<string> oldInputs = new List<string>();
+
     public TerminalResponseBundle Interpret(string userInput)
     {
+        oldInputs.Add(userInput);
+        oldInputs.Reverse();
+
         string command = userInput.Split()[0];
         object[] args = userInput.Split().Skip(1).ToArray();
 

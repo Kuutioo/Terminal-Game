@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,7 @@ public class TerminalManager : MonoBehaviour
     private void Awake()
     {
         interpreter = new Interpreter();
+
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -33,6 +35,20 @@ public class TerminalManager : MonoBehaviour
         {
             audioSource.clip = audioClips[RandomAudioClip()];
             audioSource.Play();
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (interpreter.oldInputs.Any())
+            {
+                //interpreter.oldInputs.Reverse();
+                for(int i = interpreter.oldInputs.Count - 1; i >= 0; i--)
+                {
+                    string s = interpreter.oldInputs[0 + i];
+                    Debug.Log(s);
+                    terminalInput.text = s;
+                }
+            }
         }
     }
 
