@@ -9,6 +9,11 @@ public class TerminalManager : MonoBehaviour
     public GameObject responseLine;
     [Space]
 
+    [Header("Sound Effects")]
+    private AudioSource audioSource;
+    public AudioClip[] audioClips;
+
+    [Space]
     public InputField terminalInput;
     public GameObject userInputLine;
     public ScrollRect scrollRect;
@@ -19,6 +24,16 @@ public class TerminalManager : MonoBehaviour
     private void Awake()
     {
         interpreter = new Interpreter();
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Update()
+    {
+        if (Input.anyKeyDown)
+        {
+            audioSource.clip = audioClips[RandomAudioClip()];
+            audioSource.Play();
+        }
     }
 
     private void OnGUI()
@@ -35,8 +50,7 @@ public class TerminalManager : MonoBehaviour
             AddDirectoryLine(userInput);
 
             // Add the interpretation lines
-            //int lines = AddInterpreterLines(interpreter.Interpret(userInput));
-            AddInterpreterLines2(interpreter.Interpret2(userInput));
+            AddInterpreterLines(interpreter.Interpret(userInput));
 
             // Scroll to the bottom of scroll rect
             ScrollToBottom();
@@ -66,9 +80,9 @@ public class TerminalManager : MonoBehaviour
         msg.GetComponentsInChildren<Text>()[1].text = userInput;
     }
 
-    private int AddInterpreterLines(List<string> interpretation)
+    private TerminalResponseBundle AddInterpreterLines(TerminalResponseBundle termnialResponseBundle)
     {
-        for(int i = 0; i < interpretation.Count; i++)
+        for (int i = 0; i < termnialResponseBundle.response.Count; i++)
         {
             // Instantiate the response line
             GameObject response = Instantiate(responseLine, msgList.transform);
@@ -81,31 +95,15 @@ public class TerminalManager : MonoBehaviour
             msgList.GetComponent<RectTransform>().sizeDelta = new Vector2(listSize.x, listSize.y + 20.0f);
 
             // Set text of response line to be the interpreter string
-            response.GetComponentInChildren<Text>().text = interpretation[i];
+            response.GetComponentInChildren<Text>().text = termnialResponseBundle.response[i];
         }
 
-        return interpretation.Count;
+       return termnialResponseBundle;
     }
 
-    private TerminalResponseBundle AddInterpreterLines2(TerminalResponseBundle interpretation)
+    private int RandomAudioClip()
     {
-        for (int i = 0; i < interpretation.responses.Count; i++)
-        {
-            // Instantiate the response line
-            GameObject response = Instantiate(responseLine, msgList.transform);
-
-            // Set it to end of all messages
-            response.transform.SetAsLastSibling();
-
-            // Get size of messaage list
-            Vector2 listSize = msgList.GetComponent<RectTransform>().sizeDelta;
-            msgList.GetComponent<RectTransform>().sizeDelta = new Vector2(listSize.x, listSize.y + 20.0f);
-
-            // Set text of response line to be the interpreter string
-            response.GetComponentInChildren<Text>().text = interpretation.responses[i];
-        }
-
-       return interpretation;
+        return Random.Range(0, audioClips.Length);
     }
 
     private void ScrollToBottom()
