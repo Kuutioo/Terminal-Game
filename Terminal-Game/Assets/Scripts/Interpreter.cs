@@ -12,10 +12,10 @@ public class Interpreter
         {"echo", new EchoCommand()}
     };
 
-    /*Dictionary<string, ITerminalCommand> validInput = new Dictionary<string, ITerminalCommand>()
+    Dictionary<string, ITerminalCommand> validInput = new Dictionary<string, ITerminalCommand>()
     {
         {"testing", new Testing()},
-    };*/
+    };
 
     Dictionary<string, string> colors = new Dictionary<string, string>()
     {
@@ -50,7 +50,7 @@ public class Interpreter
         return response;
     }
 
-    /*public TerminalResponseBundle Interpret2(string userInput)
+    public TerminalResponseBundle Interpret2(string userInput)
     {
         string command = userInput.Split()[0];
         object[] args = userInput.Split().Skip(1).ToArray();
@@ -66,7 +66,7 @@ public class Interpreter
             return new TerminalResponseBundle();
         }
 
-    }*/
+    }
 
     public string ColorString(string s, string color)
     {
@@ -87,7 +87,7 @@ public class Interpreter
     }
 }
 
-/*public class TerminalResponseBundle
+public class TerminalResponseBundle
 {
     //Important data
     public List<string> responses = new List<string>();
@@ -95,6 +95,36 @@ public class Interpreter
     //Additional settings
     public bool doesClearTerminal = false;
     public bool isAnimatedImage = false;
+
+    Dictionary<string, string> colors = new Dictionary<string, string>()
+    {
+        {"black", "#021b21"},
+        {"grey", "#555d71"},
+        {"red", "#ff5879"},
+        {"yellow", "#f2f1b9"},
+        {"blue", "#9ed9d8"},
+        {"purple", "#d926ff"},
+        {"orange", "#ef5847"}
+    };
+
+
+    public string ColorString(string s, string color)
+    {
+        string leftTag = "<color=" + color + ">";
+        string rightTag = "</color>";
+
+        return leftTag + s + rightTag;
+    }
+
+    public void Entry(string a, string color)
+    {
+        responses.Add(ColorString(a, colors[color]));
+    }
+
+    public void ListEntry(string a, string b, string colorA, string colorB)
+    {
+        responses.Add(ColorString(a, colors[colorA]) + ": " + ColorString(b, colors[colorB]));
+    }
 
     //Overload the add method to accept entire objects and also just strings
     public void Add(string line)
@@ -141,7 +171,9 @@ public class Testing : ITerminalCommand
     public TerminalResponseBundle Execute()
     {
         Response.Clear();
-        Debug.Log("It worked!");
+        Debug.Log("We are here!");
+        Response.Add("Hello World!");
+        Response.ListEntry("echo", "Echoes input", "red", "yellow");
         return Response;
     }
-}*/
+}

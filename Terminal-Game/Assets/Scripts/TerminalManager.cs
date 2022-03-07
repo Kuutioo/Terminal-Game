@@ -35,8 +35,8 @@ public class TerminalManager : MonoBehaviour
             AddDirectoryLine(userInput);
 
             // Add the interpretation lines
-            int lines = AddInterpreterLines(interpreter.Interpret(userInput));
-            //AddInterpreterLines2(interpreter.Interpret2(userInput));
+            //int lines = AddInterpreterLines(interpreter.Interpret(userInput));
+            AddInterpreterLines2(interpreter.Interpret2(userInput));
 
             // Scroll to the bottom of scroll rect
             ScrollToBottom();
@@ -87,9 +87,9 @@ public class TerminalManager : MonoBehaviour
         return interpretation.Count;
     }
 
-    /*private TerminalResponseBundle AddInterpreterLines2(TerminalResponseBundle interpretation)
+    private TerminalResponseBundle AddInterpreterLines2(TerminalResponseBundle interpretation)
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < interpretation.responses.Count; i++)
         {
             // Instantiate the response line
             GameObject response = Instantiate(responseLine, msgList.transform);
@@ -102,11 +102,11 @@ public class TerminalManager : MonoBehaviour
             msgList.GetComponent<RectTransform>().sizeDelta = new Vector2(listSize.x, listSize.y + 20.0f);
 
             // Set text of response line to be the interpreter string
-            //response.GetComponentInChildren<Text>().text = interpretation[i];
+            response.GetComponentInChildren<Text>().text = interpretation.responses[i];
         }
 
        return interpretation;
-    }*/
+    }
 
     private void ScrollToBottom()
     {
