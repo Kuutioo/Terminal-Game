@@ -1,2 +1,2 @@
 # Terminal-Game
-Recreated common cmd/terminal window with the unity game engine.
+Recreated cmd/termnial window in Unity
