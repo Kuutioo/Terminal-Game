@@ -22,10 +22,11 @@ public class TerminalManager : MonoBehaviour
 
     private Interpreter interpreter;
 
+    public int CommandIndex { get; set; }
+
     private void Awake()
     {
-        interpreter = new Interpreter();
-
+        interpreter = GetComponent<Interpreter>();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -37,19 +38,7 @@ public class TerminalManager : MonoBehaviour
             audioSource.Play();
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (interpreter.oldInputs.Any())
-            {
-                //interpreter.oldInputs.Reverse();
-                for(int i = interpreter.oldInputs.Count - 1; i >= 0; i--)
-                {
-                    string s = interpreter.oldInputs[0 + i];
-                    Debug.Log(s);
-                    terminalInput.text = s;
-                }
-            }
-        }
+        OldInputs();
     }
 
     private void OnGUI()
@@ -115,6 +104,52 @@ public class TerminalManager : MonoBehaviour
         }
 
        return termnialResponseBundle;
+    }
+
+    private void OldInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            try
+            {
+                if (!interpreter.oldInputs.Any())
+                {
+                    return;
+                }
+                CommandIndex -= 1;
+
+                string s = interpreter.oldInputs[CommandIndex];
+                terminalInput.text = s;
+            }
+            catch
+            {
+                terminalInput.text = interpreter.oldInputs.First();
+            }
+
+            terminalInput.caretPosition = terminalInput.text.Length;
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            try
+            {
+                if (!interpreter.oldInputs.Any())
+                {
+                    return;
+                }
+                CommandIndex += 1;
+
+                string s = interpreter.oldInputs[CommandIndex];
+                terminalInput.text = s;
+
+
+            }
+            catch
+            {
+                terminalInput.text = interpreter.oldInputs.Last();
+            }
+
+            terminalInput.caretPosition = terminalInput.text.Length;
+        }
     }
 
     private int RandomAudioClip()

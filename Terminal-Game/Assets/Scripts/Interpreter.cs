@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Interpreter
+public class Interpreter : MonoBehaviour
 {
     private Dictionary<string, ICommands> commandsDictionary = new Dictionary<string, ICommands>()
     {
@@ -13,12 +13,24 @@ public class Interpreter
         {"text_size", new TextScaleFactorCommand()}
     };
 
+    private TerminalManager terminalManager;
+
     public List<string> oldInputs = new List<string>();
+
+    private void Awake()
+    {
+        terminalManager = GetComponent<TerminalManager>();
+        oldInputs.Add(string.Empty);
+    }
 
     public TerminalResponseBundle Interpret(string userInput)
     {
-        oldInputs.Add(userInput);
-        oldInputs.Reverse();
+        if (oldInputs.Any() && oldInputs.Last() != userInput)
+        {
+            oldInputs.Add(userInput);
+        }
+        
+        terminalManager.CommandIndex = oldInputs.Count;
 
         string command = userInput.Split()[0];
         object[] args = userInput.Split().Skip(1).ToArray();
