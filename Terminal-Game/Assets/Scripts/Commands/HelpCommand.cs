@@ -9,12 +9,13 @@ public class HelpCommand : ICommands
 
     public TerminalResponseBundle Execute()
     {
+
         Response.Clear();
 
         Response.HelpEntry(Name, Description, Example, "yellow", "yellow", "yellow");
         Response.HelpEntry("echo", "Echoes input", "echo hello world", "yellow", "yellow", "yellow");
         Response.HelpEntry("clear", "Clears termnial of text", "clear", "yellow", "yellow", "yellow");
-        Response.HelpEntry("text_size", "Changes size of the text", "text_size 1.2", "yellow", "yellow", "yellow");
+        Response.HelpEntry("text_size", "Changes size of the text (1.0 - 2.1)", "text_size 1.2", "yellow", "yellow", "yellow");
 
         return Response;
     }

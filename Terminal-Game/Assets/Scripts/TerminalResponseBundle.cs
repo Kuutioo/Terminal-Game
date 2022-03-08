@@ -10,7 +10,7 @@ public class TerminalResponseBundle
     {
         {"black", "#021b21"},
         {"grey", "#555d71"},
-        {"red", "#ff5879"},
+        {"red", "#ff0000"},
         {"yellow", "#ffcb00"},
         {"blue", "#9ed9d8"},
         {"purple", "#d926ff"},
@@ -38,7 +38,7 @@ public class TerminalResponseBundle
 
     public void HelpEntry(string a, string b, string c, string colorA, string colorB, string colorC)
     {
-        response.Add(string.Format("Name: " + ColorString(a.PadRight(10), colors[colorA]) + " " + "Description: " + ColorString(b.PadRight(35), colors[colorB]) + " " + "Example: " + ColorString(c, colors[colorC])));
+        response.Add(string.Format("Name: " + ColorString(a.PadRight(10), colors[colorA]) + " " + "Description: " + ColorString(b.PadRight(40), colors[colorB]) + " " + "Example: " + ColorString(c, colors[colorC])));
     }
 
     public void Add(string line)

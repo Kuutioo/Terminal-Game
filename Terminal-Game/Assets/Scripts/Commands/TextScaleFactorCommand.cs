@@ -27,14 +27,18 @@ public class TextScaleFactorCommand : ICommands
         try
         {
             bool isNumeric = float.TryParse(Arguments[0].ToString(), NumberStyles.Currency, en, out scaleFactorValue);
-            if (isNumeric)
+
+            if(scaleFactorValue !> 1.0 && scaleFactorValue !< 2.1)
             {
-                canvasScaler.scaleFactor = scaleFactorValue;
-                Response.Entry("Changed Scale Factor to: " + scaleFactorValue.ToString().Replace(",", "."), "green");
+                if (isNumeric)
+                {
+                    canvasScaler.scaleFactor = scaleFactorValue;
+                    Response.Entry("Changed Scale Factor to: " + scaleFactorValue.ToString().Replace(",", "."), "green");
+                }
             }
             else
             {
-                Response.Entry("Please enter a floating point number as an argument", "red");
+                Response.Entry("Please enter a floating point number between 1.0 - 2.1", "red");
             }
         }
         catch

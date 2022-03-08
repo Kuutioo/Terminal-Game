@@ -140,12 +140,11 @@ public class TerminalManager : MonoBehaviour
 
                 string s = interpreter.oldInputs[CommandIndex];
                 terminalInput.text = s;
-
-
             }
             catch
             {
                 terminalInput.text = interpreter.oldInputs.Last();
+                CommandIndex = interpreter.oldInputs.Count - 1;
             }
 
             terminalInput.caretPosition = terminalInput.text.Length;
