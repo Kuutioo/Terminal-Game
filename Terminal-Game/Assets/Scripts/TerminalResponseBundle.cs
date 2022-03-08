@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,7 +39,29 @@ public class TerminalResponseBundle
 
     public void HelpEntry(string a, string b, string c, string colorA, string colorB, string colorC)
     {
-        response.Add(string.Format("Name: " + ColorString(a.PadRight(10), colors[colorA]) + " " + "Description: " + ColorString(b.PadRight(40), colors[colorB]) + " " + "Example: " + ColorString(c, colors[colorC])));
+        response.Add(string.Format("Name: " + ColorString(a.PadRight(15), colors[colorA]) + " " + "Description: " + ColorString(b.PadRight(50), colors[colorB]) + " " + "Example: " + ColorString(c, colors[colorC])));
+    }
+
+    public void LoadTitle(string path, string color, int spacing)
+    {
+        StreamReader file = new StreamReader(Path.Combine(Application.streamingAssetsPath, path));
+
+        for(int i = 0; i < spacing; i++)
+        {
+            response.Add("");
+        }
+
+        while (!file.EndOfStream)
+        {
+            response.Add(ColorString(file.ReadLine(), colors[color]));
+        }
+
+        for (int i = 0; i < spacing; i++)
+        {
+            response.Add("");
+        }
+
+        file.Close();
     }
 
     public void Add(string line)

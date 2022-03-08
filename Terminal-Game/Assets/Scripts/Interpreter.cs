@@ -10,7 +10,9 @@ public class Interpreter : MonoBehaviour
         {"help", new HelpCommand()},
         {"clear", new ClearCommand()},
         {"echo", new EchoCommand()},
-        {"text_size", new TextScaleFactorCommand()}
+        {"text_size", new TextScaleFactorCommand()},
+        {"text_intensity", new TextIntensityCommand()},
+        {"ascii_test", new AsciiTestCommand()}
     };
 
     private TerminalManager terminalManager;

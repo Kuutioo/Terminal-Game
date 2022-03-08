@@ -28,7 +28,7 @@ public class TextScaleFactorCommand : ICommands
         {
             bool isNumeric = float.TryParse(Arguments[0].ToString(), NumberStyles.Currency, en, out scaleFactorValue);
 
-            if(scaleFactorValue !> 1.0 && scaleFactorValue !< 2.1)
+            if(scaleFactorValue !>= 1.0 && scaleFactorValue !<= 2.5)
             {
                 if (isNumeric)
                 {
@@ -38,7 +38,7 @@ public class TextScaleFactorCommand : ICommands
             }
             else
             {
-                Response.Entry("Please enter a floating point number between 1.0 - 2.1", "red");
+                Response.Entry("Please enter a floating point number between 1.0 - 2.5", "red");
             }
         }
         catch

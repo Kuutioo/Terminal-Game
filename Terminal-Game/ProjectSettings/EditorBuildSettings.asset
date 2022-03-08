@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Terminal.unity
+    guid: 9faab5816052aee468cd9fd502933006
   m_configObjects: {}
