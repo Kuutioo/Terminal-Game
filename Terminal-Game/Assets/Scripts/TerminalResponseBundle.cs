@@ -1,4 +1,3 @@
-using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,22 +45,24 @@ public class TerminalResponseBundle
     {
         StreamReader file = new StreamReader(Path.Combine(Application.streamingAssetsPath, path));
 
-        for(int i = 0; i < spacing; i++)
-        {
-            response.Add("");
-        }
+        AddSpacing(spacing);
 
         while (!file.EndOfStream)
         {
             response.Add(ColorString(file.ReadLine(), colors[color]));
         }
 
+        AddSpacing(spacing);
+
+        file.Close();
+    }
+
+    public void AddSpacing(int spacing)
+    {
         for (int i = 0; i < spacing; i++)
         {
             response.Add("");
         }
-
-        file.Close();
     }
 
     public void Add(string line)

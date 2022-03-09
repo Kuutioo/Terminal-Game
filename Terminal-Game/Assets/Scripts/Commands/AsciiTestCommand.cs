@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class AsciiTestCommand : ICommands
 {
     public string Name { get; set; } = "ascii_test";
@@ -14,7 +10,7 @@ public class AsciiTestCommand : ICommands
     {
         Response.Clear();
 
-        Response.LoadTitle("ascii_test.txt", "red", 2);
+        Response.LoadTitle("ascii_test.txt", "red", 1);
 
         return Response;
     }

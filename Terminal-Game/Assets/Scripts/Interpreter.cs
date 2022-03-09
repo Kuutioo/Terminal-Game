@@ -17,12 +17,17 @@ public class Interpreter : MonoBehaviour
 
     private TerminalManager terminalManager;
 
-    public List<string> oldInputs = new List<string>();
+    private List<string> oldInputs = new List<string>();
 
     private void Awake()
     {
         terminalManager = GetComponent<TerminalManager>();
         oldInputs.Add(string.Empty);
+    }
+
+    public List<string> GetOldInputs()
+    {
+        return oldInputs;
     }
 
     public TerminalResponseBundle Interpret(string userInput)

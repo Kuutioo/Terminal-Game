@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Globalization;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -21,13 +19,11 @@ public class TextIntensityCommand : ICommands
         Volume v = pp.GetComponent<Volume>();
 
         var en = new CultureInfo("en-US");
-        Bloom b;
-        float intensityValue;
 
         try
         {
-            bool isBloom = v.profile.TryGet(out b);
-            bool isNumeric = float.TryParse(Arguments[0].ToString(), NumberStyles.Currency, en, out intensityValue);
+            bool isBloom = v.profile.TryGet(out Bloom b);
+            bool isNumeric = float.TryParse(Arguments[0].ToString(), NumberStyles.Currency, en, out float intensityValue);
 
             if (intensityValue <= 5.0)
             {

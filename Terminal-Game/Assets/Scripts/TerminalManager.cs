@@ -1,24 +1,22 @@
 using System.Linq;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TerminalManager : MonoBehaviour
 {
     [Header("Prefabs")]
-    public GameObject directoryLine;
-    public GameObject responseLine;
-    [Space]
+    [SerializeField] private GameObject directoryLine;
+    [SerializeField] private GameObject responseLine;
 
-    [Header("Sound Effects")]
+    [Space(20)]
+    [SerializeField] private AudioClip[] audioClips;
     private AudioSource audioSource;
-    public AudioClip[] audioClips;
 
-    [Space]
-    public InputField terminalInput;
-    public GameObject userInputLine;
-    public ScrollRect scrollRect;
-    public GameObject msgList;
+    [Header("Other")]
+    [SerializeField] private InputField terminalInput;
+    [SerializeField] private GameObject userInputLine;
+    [SerializeField] private ScrollRect scrollRect;
+    [SerializeField] private GameObject msgList;
 
     private Interpreter interpreter;
 
@@ -45,28 +43,33 @@ public class TerminalManager : MonoBehaviour
     {
         if(terminalInput.isFocused && terminalInput.text != "" && Input.GetKeyDown(KeyCode.Return))
         {
-            // Store user input
-            string userInput = terminalInput.text;
-
-            // Clear input field
-            ClearInputField();
-
-            // Instantiate a gameobject with directory prefix
-            AddDirectoryLine(userInput);
-
-            // Add the interpretation lines
-            AddInterpreterLines(interpreter.Interpret(userInput));
-
-            // Scroll to the bottom of scroll rect
-            ScrollToBottom();
-
-            // Move user input line
-            userInputLine.transform.SetAsLastSibling();
-
-            // Refocus the input field
-            terminalInput.ActivateInputField();
-            terminalInput.Select();
+            TerminalHandler();
         }
+    }
+
+    private void TerminalHandler()
+    {
+        // Store user input
+        string userInput = terminalInput.text;
+
+        // Clear input field
+        ClearInputField();
+
+        // Instantiate a gameobject with directory prefix
+        AddDirectoryLine(userInput);
+
+        // Add the interpretation lines
+        AddInterpreterLines(interpreter.Interpret(userInput));
+
+        // Scroll to the bottom of scroll rect
+        ScrollToBottom();
+
+        // Move user input line
+        userInputLine.transform.SetAsLastSibling();
+
+        // Refocus the input field
+        terminalInput.ActivateInputField();
+        terminalInput.Select();
     }
 
     private void AddDirectoryLine(string userInput)
@@ -109,46 +112,52 @@ public class TerminalManager : MonoBehaviour
     private void OldInputs()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            try
-            {
-                if (!interpreter.oldInputs.Any())
-                {
-                    return;
-                }
-                CommandIndex -= 1;
-
-                string s = interpreter.oldInputs[CommandIndex];
-                terminalInput.text = s;
-            }
-            catch
-            {
-                terminalInput.text = interpreter.oldInputs.First();
-            }
-
-            terminalInput.caretPosition = terminalInput.text.Length;
-        }
+            OldInputsScrollUp();
         else if (Input.GetKeyDown(KeyCode.DownArrow))
+            OldInputsScrollDown();
+    }
+
+    private void OldInputsScrollDown()
+    {
+        try
         {
-            try
+            if (!interpreter.GetOldInputs().Any())
             {
-                if (!interpreter.oldInputs.Any())
-                {
-                    return;
-                }
-                CommandIndex += 1;
-
-                string s = interpreter.oldInputs[CommandIndex];
-                terminalInput.text = s;
+                return;
             }
-            catch
-            {
-                terminalInput.text = interpreter.oldInputs.Last();
-                CommandIndex = interpreter.oldInputs.Count - 1;
-            }
+            CommandIndex += 1;
 
-            terminalInput.caretPosition = terminalInput.text.Length;
+            string s = interpreter.GetOldInputs()[CommandIndex];
+            terminalInput.text = s;
         }
+        catch
+        {
+            terminalInput.text = interpreter.GetOldInputs().Last();
+            CommandIndex = interpreter.GetOldInputs().Count - 1;
+        }
+
+        terminalInput.caretPosition = terminalInput.text.Length;
+    }
+
+    private void OldInputsScrollUp()
+    {
+        try
+        {
+            if (!interpreter.GetOldInputs().Any())
+            {
+                return;
+            }
+            CommandIndex -= 1;
+
+            string s = interpreter.GetOldInputs()[CommandIndex];
+            terminalInput.text = s;
+        }
+        catch
+        {
+            terminalInput.text = interpreter.GetOldInputs().First();
+        }
+
+        terminalInput.caretPosition = terminalInput.text.Length;
     }
 
     private int RandomAudioClip()

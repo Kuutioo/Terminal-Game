@@ -16,7 +16,6 @@ MonoBehaviour:
   - {fileID: 7052434717433486878}
   - {fileID: 4345759195900664793}
   - {fileID: 4724411510006095030}
-  - {fileID: 4599085594909584387}
   - {fileID: 4442292844976939174}
 --- !u!114 &4345759195900664793
 MonoBehaviour:
@@ -67,11 +66,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb60a22f311433c4c962b888d1393f88, type: 3}
   m_Name: PaniniProjection
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   distance:
     m_OverrideState: 1
-    m_Value: 0.025
+    m_Value: 0.0175
     min: 0
     max: 1
   cropToFit:
@@ -79,68 +78,6 @@ MonoBehaviour:
     m_Value: 0
     min: 0
     max: 1
---- !u!114 &4599085594909584387
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
-  m_Name: DepthOfField
-  m_EditorClassIdentifier: 
-  active: 0
-  m_AdvancedMode: 0
-  mode:
-    m_OverrideState: 1
-    m_Value: 2
-  gaussianStart:
-    m_OverrideState: 1
-    m_Value: 0
-    min: 0
-  gaussianEnd:
-    m_OverrideState: 1
-    m_Value: 58.58
-    min: 0
-  gaussianMaxRadius:
-    m_OverrideState: 1
-    m_Value: 0.5
-    min: 0.5
-    max: 1.5
-  highQualitySampling:
-    m_OverrideState: 1
-    m_Value: 0
-  focusDistance:
-    m_OverrideState: 1
-    m_Value: 3
-    min: 0.1
-  aperture:
-    m_OverrideState: 0
-    m_Value: 5.6
-    min: 1
-    max: 32
-  focalLength:
-    m_OverrideState: 0
-    m_Value: 50
-    min: 1
-    max: 300
-  bladeCount:
-    m_OverrideState: 0
-    m_Value: 5
-    min: 3
-    max: 9
-  bladeCurvature:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-    max: 1
-  bladeRotation:
-    m_OverrideState: 0
-    m_Value: 0
-    min: -180
-    max: 180
 --- !u!114 &4724411510006095030
 MonoBehaviour:
   m_ObjectHideFlags: 3

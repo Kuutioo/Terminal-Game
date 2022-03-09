@@ -1,7 +1,4 @@
-using System;
 using System.Globalization;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,13 +19,11 @@ public class TextScaleFactorCommand : ICommands
 
         var en = new CultureInfo("en-US");
 
-        float scaleFactorValue;
-
         try
         {
-            bool isNumeric = float.TryParse(Arguments[0].ToString(), NumberStyles.Currency, en, out scaleFactorValue);
+            bool isNumeric = float.TryParse(Arguments[0].ToString(), NumberStyles.Currency, en, out float scaleFactorValue);
 
-            if(scaleFactorValue !>= 1.0 && scaleFactorValue !<= 2.5)
+            if (scaleFactorValue! >= 1.0 && scaleFactorValue! <= 2.5)
             {
                 if (isNumeric)
                 {
@@ -45,7 +40,7 @@ public class TextScaleFactorCommand : ICommands
         {
             Response.Entry("Please enter an argument in the form of a floating point number", "red");
         }
-        
+
         return Response;
     }
 }
