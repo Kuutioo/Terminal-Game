@@ -155,6 +155,7 @@ public class TerminalManager : MonoBehaviour
         catch
         {
             terminalInput.text = interpreter.GetOldInputs().First();
+            CommandIndex = interpreter.GetOldInputs().First().Length;
         }
 
         terminalInput.caretPosition = terminalInput.text.Length;

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 public class ClearCommand : ICommands
 {
     public string Name { get; set; } = "clear";

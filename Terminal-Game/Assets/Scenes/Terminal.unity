@@ -1807,6 +1807,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4868966316551022161, guid: c425a3ecb4dfeb045b1c1a42ec35ca55, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4868966316551022161, guid: c425a3ecb4dfeb045b1c1a42ec35ca55, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4868966316551022161, guid: c425a3ecb4dfeb045b1c1a42ec35ca55, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4868966316551022161, guid: c425a3ecb4dfeb045b1c1a42ec35ca55, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c425a3ecb4dfeb045b1c1a42ec35ca55, type: 3}
 --- !u!224 &4940074041023133271 stripped
@@ -2102,6 +2118,22 @@ PrefabInstance:
     - target: {fileID: 658871813527539762, guid: fdedf8b2ed1d42b43acd7fff72edcf79, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 658871813527539763, guid: fdedf8b2ed1d42b43acd7fff72edcf79, type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 658871813527539763, guid: fdedf8b2ed1d42b43acd7fff72edcf79, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 658871813527539763, guid: fdedf8b2ed1d42b43acd7fff72edcf79, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 658871813527539763, guid: fdedf8b2ed1d42b43acd7fff72edcf79, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdedf8b2ed1d42b43acd7fff72edcf79, type: 3}

@@ -1,3 +1,4 @@
+using System.Collections;
 public class AsciiTestCommand : ICommands
 {
     public string Name { get; set; } = "ascii_test";

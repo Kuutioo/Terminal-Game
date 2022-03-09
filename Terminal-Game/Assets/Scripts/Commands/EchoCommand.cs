@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 public class EchoCommand : ICommands
 {
     public string Name { get; set; } = "echo";
@@ -6,6 +7,7 @@ public class EchoCommand : ICommands
     public string Description { get; set; } = "Print text to terminal";
     public object[] Arguments { get; set; }
     public TerminalResponseBundle Response { get; set; } = new TerminalResponseBundle();
+    
 
     public TerminalResponseBundle Execute()
     {

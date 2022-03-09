@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TerminalBootCommand : ICommands
@@ -12,8 +11,23 @@ public class TerminalBootCommand : ICommands
 
     public TerminalResponseBundle Execute()
     {
+        ClearCommandLine();
         Response.Clear();
 
+        Response.Add("Initializing terminal");
+
+
         return Response;
+    }
+
+    private void ClearCommandLine()
+    {
+        GameObject commandLine = GameObject.Find("Command Line Container");
+
+        foreach (Transform child in commandLine.transform)
+        {
+            Object.Destroy(child.gameObject);
+        }
+        commandLine.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 0);
     }
 }

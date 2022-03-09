@@ -7,6 +7,7 @@ public class Interpreter : MonoBehaviour
 {
     private Dictionary<string, ICommands> commandsDictionary = new Dictionary<string, ICommands>()
     {
+        {"boot", new TerminalBootCommand()},
         {"help", new HelpCommand()},
         {"clear", new ClearCommand()},
         {"echo", new EchoCommand()},
@@ -46,6 +47,7 @@ public class Interpreter : MonoBehaviour
         {
             ICommands c = commandsDictionary[command];
             c.Arguments = args;
+
             return c.Execute();
         }
         else

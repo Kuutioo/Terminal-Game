@@ -15,6 +15,7 @@ public class TerminalResponseBundle
         {"blue", "#9ed9d8"},
         {"purple", "#d926ff"},
         {"orange", "#ef5847"},
+        {"white", "#ffffff"},
         {"green", "#00ff15"}
     };
 
