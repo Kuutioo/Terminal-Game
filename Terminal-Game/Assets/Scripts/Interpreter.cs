@@ -7,12 +7,15 @@ public class Interpreter : MonoBehaviour
 {
     private Dictionary<string, ICommands> commandsDictionary = new Dictionary<string, ICommands>()
     {
-        {"boot", new TerminalBootCommand()},
         {"help", new HelpCommand()},
         {"clear", new ClearCommand()},
         {"echo", new EchoCommand()},
+
         {"text_size", new TextScaleFactorCommand()},
         {"text_intensity", new TextIntensityCommand()},
+
+        {"email", new EmailCommand()},
+
         {"ascii_test", new AsciiTestCommand()}
     };
 
