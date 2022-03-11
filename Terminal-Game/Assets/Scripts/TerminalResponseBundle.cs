@@ -86,7 +86,7 @@ public class TerminalResponseBundle
     }
 
     /// <summary>
-    /// Clear the command line
+    /// Clears the command line
     /// </summary>
     public void ClearCommandLine()
     {
@@ -94,9 +94,12 @@ public class TerminalResponseBundle
 
         foreach (Transform child in commandLine.transform)
         {
-            Object.Destroy(child.gameObject);
+            if (!child.gameObject.CompareTag("InputLine"))
+            {
+                Object.Destroy(child.gameObject);
+            }
         }
-        commandLine.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 0);
+        commandLine.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 15);
     }
 
     /// <summary>
