@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,33 +11,32 @@ public class EmailCommand : ICommands
     public object[] Arguments { get; set; }
     public TerminalResponseBundle Response { get; set; } = new TerminalResponseBundle();
 
-    private Dictionary<string, ICommands> emailArguments = new Dictionary<string, ICommands>()
-    {
-        {"open", new OpenEmailCommand()}
-    };
+    private Dictionary<string, Action> emailArguments = new Dictionary<string, Action>();
 
     public TerminalResponseBundle Execute()
     {
+        emailArguments["open"] = OpenEmail;
+        emailArguments["delete"] = DeleteEmail;
+
         Response.Clear();
         Response.ClearCommandLine();
 
         if (Arguments.Length > 0)
-        {
+        {   
             for(int i = 0; i < Arguments.Length; i++)
             {
                 string argument = Arguments[i].ToString();
                 if (emailArguments.ContainsKey(argument))
                 {
-                    ICommands c = emailArguments[argument];
-                    c.Arguments = Arguments;
-                    return c.Execute();
+                    emailArguments[argument]();
+                    return Response;
                 }
             }
         }
 
         Response.LoadTitle("ascii_gorillamail.txt", "green", 1);
         if (Response.showNewEmail)
-            Response.NumberOfEmails(Random.Range(2, 5));
+            Response.GenerateEmails(UnityEngine.Random.Range(2, 5));
         else
         {
             for(int i = 0; i < Response.emailFrom.Count; i++)
@@ -48,7 +48,19 @@ public class EmailCommand : ICommands
             }
         }
 
-
         return Response;
+    }
+
+    private void OpenEmail()
+    {
+        if (Arguments[1].ToString() == "1")
+        {
+            Response.EmailEntry(Response.emailFrom[0], "mark@gorillamail.com", Response.emailSubject[0], "124.234.665");
+        } 
+    }
+
+    private void DeleteEmail()
+    {
+        Response.Add("delete");
     }
 }

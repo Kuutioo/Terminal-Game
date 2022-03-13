@@ -20,6 +20,7 @@ public class TerminalResponseBundle
     };
 
     public bool showNewEmail = true;
+
     public List<string> emailFrom = new List<string>();
     public List<string> emailSubject = new List<string>();
 
@@ -73,6 +74,13 @@ public class TerminalResponseBundle
         response.Add(string.Format("Name: " + ColorString(a.PadRight(15), colors[colorA]) + " " + "Description: " + ColorString(b.PadRight(50), colors[colorB]) + " " + "Example: " + ColorString(c, colors[colorC])));
     }
 
+    /// <summary>
+    /// Display who sent the email, who was the email sent to, the subject and text
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <param name="subject"></param>
+    /// <param name="text"></param>
     public void EmailEntry(string from, string to, string subject, string text)
     {
         Entry("From: " + from, "green");
@@ -83,12 +91,21 @@ public class TerminalResponseBundle
         Entry("Text: " + text, "green");
     }
 
+    /// <summary>
+    /// Entry for the email interface
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="subject"></param>
     public void EmailInterfaceEntry(string from, string subject)
     {
         response.Add(string.Format("From: " + ColorString(from.PadRight(25), colors["green"]) + "Subject: " + ColorString(subject, colors["green"])));
     }
 
-    public void NumberOfEmails(int emailNumber)
+    /// <summary>
+    /// Display the amount of emails we want to show
+    /// </summary>
+    /// <param name="emailNumber"></param>
+    public void GenerateEmails(int emailNumber)
     {
         List<string> subjects = new List<string>()
         {
@@ -96,7 +113,6 @@ public class TerminalResponseBundle
             {"Hack this ip and get me their address"},
             {"Hack this ip and get me their Drivers license ID"}
         };
-
 
         for (int i = 0; i < emailNumber; i++)
         {
@@ -117,7 +133,11 @@ public class TerminalResponseBundle
         showNewEmail = false;
     }
 
-    public char GetRandomCharAZ()
+    /// <summary>
+    /// Get a random character
+    /// </summary>
+    /// <returns></returns>
+    private char GetRandomCharAZ()
     {
         return (char)Random.Range('a', 'z');
     }
@@ -133,7 +153,7 @@ public class TerminalResponseBundle
         {
             if (!child.gameObject.CompareTag("InputLine"))
             {
-                UnityEngine.Object.Destroy(child.gameObject);
+                Object.Destroy(child.gameObject);
             }
         }
         commandLine.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 15);
