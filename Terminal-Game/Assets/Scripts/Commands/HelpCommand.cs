@@ -19,7 +19,7 @@ public class HelpCommand : ICommands
         Response.AddSpacing(1);
         Response.Entry("Text", "yellow");
         Response.HelpEntry("text_size", "Changes size of the text (1.0 - 2.5)", "text_size 1.2", "yellow", "yellow", "yellow");
-        Response.HelpEntry("text_intensity", "Change the intensity of the text (0.0 - 5.0)", "text_intensity 2.5", "yellow", "yellow", "yellow");
+        Response.HelpEntry("text_intensity", "Change the intensity of the text (0.0 - 1.0)", "text_intensity 0.5", "yellow", "yellow", "yellow");
 
         Response.AddSpacing(1);
         Response.Entry("Other", "yellow");

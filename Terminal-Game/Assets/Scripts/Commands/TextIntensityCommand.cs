@@ -7,7 +7,7 @@ using UnityEngine.Rendering.Universal;
 public class TextIntensityCommand : ICommands
 {
     public string Name { get; set; } = "text_intensity";
-    public string Example { get; set; } = "text_intensity 2.5";
+    public string Example { get; set; } = "text_intensity 0.5";
     public string Description { get; set; } = "Change the intensity of the text";
     public object[] Arguments { get; set; }
     public TerminalResponseBundle Response { get; set; } = new TerminalResponseBundle();
@@ -26,7 +26,7 @@ public class TextIntensityCommand : ICommands
             bool isBloom = v.profile.TryGet(out Bloom b);
             bool isNumeric = float.TryParse(Arguments[0].ToString(), NumberStyles.Currency, en, out float intensityValue);
 
-            if (intensityValue <= 5.0)
+            if (intensityValue <= 1.0)
             {
                 if (isBloom && isNumeric)
                 {

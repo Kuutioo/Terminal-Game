@@ -16,14 +16,15 @@ public class EmailCommand : ICommands
     public TerminalResponseBundle Execute()
     {
         emailArguments["open"] = OpenEmail;
-        emailArguments["delete"] = DeleteEmail;
 
         Response.Clear();
         Response.ClearCommandLine();
 
+        ShowEmails();
+
         if (Arguments.Length > 0)
-        {   
-            for(int i = 0; i < Arguments.Length; i++)
+        {
+            for (int i = 0; i < Arguments.Length; i++)
             {
                 string argument = Arguments[i].ToString();
                 if (emailArguments.ContainsKey(argument))
@@ -34,12 +35,18 @@ public class EmailCommand : ICommands
             }
         }
 
+
+        return Response;
+    }
+
+    private void ShowEmails()
+    {
         Response.LoadTitle("ascii_gorillamail.txt", "green", 1);
         if (Response.showNewEmail)
             Response.GenerateEmails(UnityEngine.Random.Range(2, 5));
         else
         {
-            for(int i = 0; i < Response.emailFrom.Count; i++)
+            for (int i = 0; i < Response.emailFrom.Count; i++)
             {
                 string from = Response.emailFrom[i];
                 string subject = Response.emailSubject[i];
@@ -47,20 +54,18 @@ public class EmailCommand : ICommands
                 Response.EmailInterfaceEntry(from, subject);
             }
         }
-
-        return Response;
     }
 
     private void OpenEmail()
     {
-        if (Arguments[1].ToString() == "1")
+        Response.AddSpacing(1);
+        for(int i = 0; i < Response.emailFrom.Count; i++)
         {
-            Response.EmailEntry(Response.emailFrom[0], "mark@gorillamail.com", Response.emailSubject[0], "124.234.665");
-        } 
-    }
-
-    private void DeleteEmail()
-    {
-        Response.Add("delete");
+            if (Arguments[1].ToString() == i.ToString())
+            {
+                Response.EmailEntry(Response.emailFrom[i], "mark@gorillamail.com", Response.emailSubject[i], "124.234.665");
+            }
+        }
+        Response.AddSpacing(1);
     }
 }
