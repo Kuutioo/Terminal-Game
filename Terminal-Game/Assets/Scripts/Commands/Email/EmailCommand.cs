@@ -15,7 +15,6 @@ public class EmailCommand : ICommands
         {"open", new OpenEmailCommand()}
     };
 
-
     public TerminalResponseBundle Execute()
     {
         Response.Clear();
@@ -29,13 +28,26 @@ public class EmailCommand : ICommands
                 if (emailArguments.ContainsKey(argument))
                 {
                     ICommands c = emailArguments[argument];
+                    c.Arguments = Arguments;
                     return c.Execute();
                 }
             }
         }
 
         Response.LoadTitle("ascii_gorillamail.txt", "green", 1);
-        Response.EmailInterfaceEntry("rkfngis@gorillamail.com", "Hack this now!");
+        if (Response.showNewEmail)
+            Response.NumberOfEmails(Random.Range(2, 5));
+        else
+        {
+            for(int i = 0; i < Response.emailFrom.Count; i++)
+            {
+                string from = Response.emailFrom[i];
+                string subject = Response.emailSubject[i];
+
+                Response.EmailInterfaceEntry(from, subject);
+            }
+        }
+
 
         return Response;
     }

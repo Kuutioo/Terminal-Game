@@ -19,6 +19,10 @@ public class TerminalResponseBundle
         {"green", "#00ff15"}
     };
 
+    public bool showNewEmail = true;
+    public List<string> emailFrom = new List<string>();
+    public List<string> emailSubject = new List<string>();
+
     /// <summary>
     /// Easily add color to strings
     /// </summary>
@@ -32,7 +36,6 @@ public class TerminalResponseBundle
 
         return leftTag + s + rightTag;
     }
-
 
     /// <summary>
     /// Add a single entry to the command line with text and a color
@@ -85,6 +88,40 @@ public class TerminalResponseBundle
         response.Add(string.Format("From: " + ColorString(from.PadRight(25), colors["green"]) + "Subject: " + ColorString(subject, colors["green"])));
     }
 
+    public void NumberOfEmails(int emailNumber)
+    {
+        List<string> subjects = new List<string>()
+        {
+            {"Hack this ip and get me their phone number"},
+            {"Hack this ip and get me their address"},
+            {"Hack this ip and get me their Drivers license ID"}
+        };
+
+
+        for (int i = 0; i < emailNumber; i++)
+        {
+            string from = string.Empty;
+            string subject = subjects[Random.Range(0, subjects.Count)];
+
+            for (int j = 0; j < Random.Range(4, 6); j++)
+            {
+                from += GetRandomCharAZ().ToString();
+            }
+            from += "@gorillamail.com";
+
+            EmailInterfaceEntry(from, subject);
+            emailFrom.Add(from);
+            emailSubject.Add(subject);
+        }
+
+        showNewEmail = false;
+    }
+
+    public char GetRandomCharAZ()
+    {
+        return (char)Random.Range('a', 'z');
+    }
+
     /// <summary>
     /// Clears the command line
     /// </summary>
@@ -96,7 +133,7 @@ public class TerminalResponseBundle
         {
             if (!child.gameObject.CompareTag("InputLine"))
             {
-                Object.Destroy(child.gameObject);
+                UnityEngine.Object.Destroy(child.gameObject);
             }
         }
         commandLine.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 15);
