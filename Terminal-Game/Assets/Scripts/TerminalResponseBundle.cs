@@ -19,11 +19,6 @@ public class TerminalResponseBundle
         {"green", "#00ff15"}
     };
 
-    public bool showNewEmail = true;
-
-    public List<string> emailFrom = new List<string>();
-    public List<string> emailSubject = new List<string>();
-
     /// <summary>
     /// Easily add color to strings
     /// </summary>
@@ -101,43 +96,12 @@ public class TerminalResponseBundle
         response.Add(string.Format("From: " + ColorString(from.PadRight(25), colors["green"]) + "Subject: " + ColorString(subject, colors["green"])));
     }
 
-    /// <summary>
-    /// Display the amount of emails we want to show
-    /// </summary>
-    /// <param name="emailNumber"></param>
-    public void GenerateEmails(int emailNumber)
-    {
-        List<string> subjects = new List<string>()
-        {
-            {"Hack this ip and get me their phone number"},
-            {"Hack this ip and get me their address"},
-            {"Hack this ip and get me their Drivers license ID"}
-        };
-
-        for (int i = 0; i < emailNumber; i++)
-        {
-            string from = string.Empty;
-            string subject = subjects[Random.Range(0, subjects.Count)];
-
-            for (int j = 0; j < Random.Range(4, 6); j++)
-            {
-                from += GetRandomCharAZ().ToString();
-            }
-            from += "@gorillamail.com";
-
-            EmailInterfaceEntry(from, subject);
-            emailFrom.Add(from);
-            emailSubject.Add(subject);
-        }
-
-        showNewEmail = false;
-    }
 
     /// <summary>
     /// Get a random character
     /// </summary>
     /// <returns></returns>
-    private char GetRandomCharAZ()
+    public char GetRandomCharAZ()
     {
         return (char)Random.Range('a', 'z');
     }

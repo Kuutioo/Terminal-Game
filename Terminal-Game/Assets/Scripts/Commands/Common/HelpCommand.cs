@@ -22,6 +22,11 @@ public class HelpCommand : ICommands
         Response.HelpEntry("text_intensity", "Change the intensity of the text (0.0 - 1.0)", "text_intensity 0.5", "yellow", "yellow", "yellow");
 
         Response.AddSpacing(1);
+        Response.Entry("Email", "yellow");
+        Response.HelpEntry("email", "Opens email inbox", "email", "yellow", "yellow", "yellow");
+        Response.HelpEntry("email open", "Opens specific email", "email open 0", "yellow", "yellow", "yellow");
+
+        Response.AddSpacing(1);
         Response.Entry("Other", "yellow");
         Response.HelpEntry("ascii_test", "Renders the word 'test' in ascii", "ascii_test", "yellow", "yellow", "yellow");
 

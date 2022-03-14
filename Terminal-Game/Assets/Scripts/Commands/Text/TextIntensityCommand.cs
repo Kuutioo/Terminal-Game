@@ -36,7 +36,7 @@ public class TextIntensityCommand : ICommands
             }
             else
             {
-                Response.Entry("Please enter a floating point number between 0.0 - 5.0", "red");
+                Response.Entry("Please enter a floating point number between 0.0 - 1.0", "red");
             }
         }
         catch
