@@ -108,10 +108,7 @@ public class EmailCommand : ICommands
 
             Response.EmailInterfaceEntry(from, subject);
             emailFrom.Add(from);
-            //emailText.Add(text);
             emailSubject.Add(subject);
-
-            Debug.Log("Email text: " + emailText[i]);
         }
 
         showNewEmail = false;

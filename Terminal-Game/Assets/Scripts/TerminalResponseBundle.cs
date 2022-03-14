@@ -145,6 +145,10 @@ public class TerminalResponseBundle
         file.Close();
     }
 
+    /// <summary>
+    /// Add spacing
+    /// </summary>
+    /// <param name="spacing"></param>
     public void AddSpacing(int spacing)
     {
         for (int i = 0; i < spacing; i++)
@@ -153,11 +157,18 @@ public class TerminalResponseBundle
         }
     }
 
+    /// <summary>
+    /// Override the add methdod
+    /// </summary>
+    /// <param name="line"></param>
     public void Add(string line)
     {
         response.Add(line);
     }
 
+    /// <summary>
+    /// Override the clear method
+    /// </summary>
     public void Clear()
     {
         response.Clear();
