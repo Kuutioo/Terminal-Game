@@ -84,9 +84,9 @@ public class EmailCommand : ICommands
     {
         List<string> subjects = new List<string>()
         {
-            {"Hack this ip and get me their phone number"},
-            {"Hack this ip and get me their address"},
-            {"Hack this ip and get me their Drivers license ID"}
+            {"Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum"}
+            /*{"Hack this ip and get me their address"},
+            {"Hack this ip and get me their Drivers license ID"}*/
         };
 
         for (int i = 0; i < emailNumber; i++)
