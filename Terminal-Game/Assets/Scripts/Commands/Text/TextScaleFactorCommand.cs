@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TextScaleFactorCommand : ICommands
 {
     public string Name { get; set; } = "text_size";
-    public string Example { get; set; } = "text_size 1.2";
+    public string Example { get; set; } = "text_size 0.6";
     public string Description { get; set; } = "Changes size of the terminal text";
     public object[] Arguments { get; set; }
     public TerminalResponseBundle Response { get; set; } = new TerminalResponseBundle();
@@ -24,17 +24,17 @@ public class TextScaleFactorCommand : ICommands
         {
             bool isNumeric = float.TryParse(Arguments[0].ToString(), NumberStyles.Currency, en, out float scaleFactorValue);
 
-            if (scaleFactorValue! >= 1.0 && scaleFactorValue! <= 2.5)
+            if (scaleFactorValue! >= 0.0 && scaleFactorValue! <= 1.0)
             {
                 if (isNumeric)
                 {
-                    canvasScaler.scaleFactor = scaleFactorValue;
+                    canvasScaler.matchWidthOrHeight = scaleFactorValue;
                     Response.Entry("Changed Scale Factor to: " + scaleFactorValue.ToString().Replace(",", "."), "green");
                 }
             }
             else
             {
-                Response.Entry("Please enter a floating point number between 1.0 - 2.5", "red");
+                Response.Entry("Please enter a floating point number between 0.0 - 1.0", "red");
             }
         }
         catch

@@ -115,9 +115,13 @@ public class TerminalResponseBundle
 
         foreach (Transform child in commandLine.transform)
         {
-            if (!child.gameObject.CompareTag("InputLine"))
+            if (!child.gameObject.CompareTag("InputLine") && !child.gameObject.CompareTag("Camera"))
             {
                 Object.Destroy(child.gameObject);
+            }
+            if (child.gameObject.CompareTag("Camera"))
+            {
+                child.gameObject.SetActive(false);
             }
         }
         commandLine.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 15);

@@ -12,16 +12,8 @@ public class ClearCommand : ICommands
     {
         Response.Clear();
 
-        GameObject commandLine = GameObject.Find("Command Line Container");
+        Response.ClearCommandLine();
 
-        foreach (Transform child in commandLine.transform)
-        {
-            if (!child.gameObject.CompareTag("InputLine"))
-            {
-                Object.Destroy(child.gameObject);
-            }
-        }
-        commandLine.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 15);
         return Response;
     }
 }

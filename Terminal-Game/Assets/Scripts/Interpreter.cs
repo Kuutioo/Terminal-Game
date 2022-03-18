@@ -11,10 +11,13 @@ public class Interpreter : MonoBehaviour
         {"clear", new ClearCommand()},
         {"echo", new EchoCommand()},
 
-        {"text_size", new TextScaleFactorCommand()},
-        {"text_intensity", new TextIntensityCommand()},
+        // Maybe re-add these later?
+        /*{"text_size", new TextScaleFactorCommand()},
+        {"text_intensity", new TextIntensityCommand()},*/
 
         {"email", new EmailCommand()},
+
+        {"camera", new CameraCommand()},
 
         {"ascii_test", new AsciiTestCommand()}
     };
