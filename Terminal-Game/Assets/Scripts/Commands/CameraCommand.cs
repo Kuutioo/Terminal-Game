@@ -23,7 +23,14 @@ public class CameraCommand : ICommands
             SearchCameras();
         Response.ClearCommandLine();
 
-        DisplayCamera();
+        try
+        {
+            DisplayCamera();
+        }
+        catch
+        {
+            Response.Entry("Please enter camera number", "red");
+        }
     
 
         return Response;
@@ -48,7 +55,7 @@ public class CameraCommand : ICommands
         cameras[cameraIndex].SetActive(true);
 
         GameObject commandLineContainer = GameObject.Find("Command Line Container");
-        commandLineContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 500);
+        commandLineContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 480);
     }
 }
 

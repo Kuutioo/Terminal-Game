@@ -18,6 +18,7 @@ public class Interpreter : MonoBehaviour
         {"email", new EmailCommand()},
 
         {"camera", new CameraCommand()},
+        {"log", new LogCommand()},
 
         {"ascii_test", new AsciiTestCommand()}
     };
