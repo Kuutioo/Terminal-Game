@@ -18,10 +18,10 @@ public class CameraCommand : ICommands
     public TerminalResponseBundle Execute()
     {
         Response.Clear();
-        Response.ClearCommandLine();
-
+        
         if (!hasCameras)
             SearchCameras();
+        Response.ClearCommandLine();
 
         DisplayCamera();
     
@@ -43,7 +43,12 @@ public class CameraCommand : ICommands
     private void DisplayCamera()
     {
         int cameraIndex = int.Parse(Arguments[0].ToString());
+        Response.Entry("Camera " + cameraIndex.ToString(), "green");
+
         cameras[cameraIndex].SetActive(true);
+
+        GameObject commandLineContainer = GameObject.Find("Command Line Container");
+        commandLineContainer.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 500);
     }
 }
 
